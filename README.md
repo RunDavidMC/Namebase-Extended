@@ -44,6 +44,7 @@ Transfer many domains in bulk, with 2FA automation.
 # Usage
 
 If you are a windows user and are unexpirienced with Python, simply download the [latest release](https://github.com/RunDavidMC/Namebase-Extended/releases/latest).
+It will show a security notice, just ignore it, it is becuase I am not a recognized developer yet.
 
 If you are expirienced with Python or not on Windows (MacOS and Linux binaries coming soon), clone the repository with `git clone https://github.com/RunDavidMC/Namebase-Extended.git`, then install all required packages with `pip install -r requirements.txt`.
 You can then run it with `python3 main.py`.
