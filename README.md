@@ -55,7 +55,7 @@ If you find any security issues, or have any features request, please create a n
 # Contribution
 
 Creating issues and bughunting are greatly appriciated.
-You can also create a pull request to contribute code.
+You can also fork the repository contribute code.
 
 You can donate at `hs1qnk4w8wwun20ru93syg8aeuegek2avep9fjpdu3`. It is not required, but I would be very grateful if you did.
 
