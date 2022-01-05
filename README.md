@@ -49,6 +49,8 @@ It will show a security notice, just ignore it, it is becuase I am not a recogni
 If you are expirienced with Python or not on Windows (MacOS and Linux binaries coming soon), clone the repository with `git clone https://github.com/RunDavidMC/Namebase-Extended.git`, then install all required packages with `pip install -r requirements.txt`.
 You can then run it with `python3 main.py`.
 
+If you would like to compile a build yourself, you can do `pip install pyinstaller`, then `pyinstaller --onefile --console main.py`.
+
 # Issues
 
 If you find any security issues, or have any features request, please create a new issue for it.
