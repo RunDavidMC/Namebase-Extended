@@ -55,7 +55,7 @@ def lister(names):
 
   cClear()
 
-  confirm = input(Fore.RED + "Are you sure you want to list " + str(len(names)) + " name" + plr + " for " + str(len(names) * price) + " HNS each? [y/n] " + Style.RESET_ALL)
+  confirm = input(Fore.RED + "Are you sure you want to list " + str(len(names)) + " name" + plr + " for " + str(price) + " HNS each (" + str(len(names) * price) + " HNS total)? [y/n] " + Style.RESET_ALL)
 
   if confirm.lower() != "y":
     cClear()
@@ -73,7 +73,12 @@ def lister(names):
 
     def req():
 
-      r = requests.post(endpoint + "/api/v0/marketplace/" + x + "/list", params=params, data=json.dumps(params), headers=headers, cookies={"namebase-main": cookies}).json()
+      try:
+        r = requests.post(endpoint + "/api/v0/marketplace/" + x + "/list", params=params, data=json.dumps(params), headers=headers, cookies={"namebase-main": cookies}).json()
+      except:
+        print(Fore.RED + "An error occured... Trying again." + Style.RESET_ALL)
+        time.sleep(5)
+        req()
 
       try:
         if r['success']:

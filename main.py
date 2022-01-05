@@ -22,7 +22,7 @@ colors = [
   Fore.MAGENTA
   ]
 
-version = "v0.0.5a"
+version = "v0.0.6a"
 
 pName = Fore.BLUE + "--- Namebase Extended ---" + Style.RESET_ALL
 
@@ -40,7 +40,11 @@ def updater():
     return
   try:
     if r['tag_name'].lower() != version.lower() and str(r['prerelease']).lower() == "false" and str(r['draft']).lower() == "false":
-      print(Fore.GREEN + "An update is availible! Current version: " + version + ", updated version: " + r['tag_name'] + ".\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest\n" + Style.RESET_ALL)
+      if r['body'] == "":
+        desc = "None."
+      else:
+        desc = r['body']
+      print(Fore.GREEN + "An update is availible! Current version: " + version + ", updated version: " + r['tag_name'] + ".\nDescription: " + desc + "\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest.\n" + Style.RESET_ALL)
       conf = input(Fore.GREEN + "Press enter to continue ")
   except:
     print(Fore.RED + "Update check failed!" + Style.RESET_ALL)
@@ -57,7 +61,8 @@ def menu():
   "Generate names",
   "Get statuses on names",
   "Get user info",
-  "Transfer names",]
+  "Transfer names",
+  "Exit program",]
 
   optOn = -1
 
@@ -94,6 +99,8 @@ def handler(choice):
     userinfo.main(cookie)
   elif choice == "6":
     transfer.main(cookie)
+  elif choice == "7":
+    exit()
   else:
     cClear()
     print(Fore.RED + "Invalid option!" + Style.RESET_ALL)
