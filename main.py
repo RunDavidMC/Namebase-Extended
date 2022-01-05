@@ -22,7 +22,7 @@ colors = [
   Fore.MAGENTA
   ]
 
-version = "v0.0.4a"
+version = "v0.0.5a"
 
 pName = Fore.BLUE + "--- Namebase Extended ---" + Style.RESET_ALL
 
@@ -33,14 +33,14 @@ def updater():
   cClear()
 
   try:
-    r = requests.get("https://api.github.com/repos/rundavidmc/Namebase-Extended/releases/latest").json()
+    r = requests.get("https://api.github.com/repos/RunDavidMC/Namebase-Extended/releases/latest").json()
   except:
     print(Fore.RED + "Update check failed!" + Style.RESET_ALL)
     time.sleep(2)
     return
   try:
     if r['tag_name'].lower() != version.lower() and str(r['prerelease']).lower() == "false" and str(r['draft']).lower() == "false":
-      print(Fore.GREEN + "An update is availible!\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest\n" + Style.RESET_ALL)
+      print(Fore.GREEN + "An update is availible! Current version: " + version + ", updated version: " + r['tag_name'] + ".\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest\n" + Style.RESET_ALL)
       conf = input(Fore.GREEN + "Press enter to continue ")
   except:
     print(Fore.RED + "Update check failed!" + Style.RESET_ALL)
