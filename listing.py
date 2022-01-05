@@ -66,8 +66,6 @@ def lister(names):
   params = {"amount": str(price), "asset": "HNS","description": desc}
   headers = {"Accept": 'application/json', "Content-Type": 'application/json'}
 
-  print(params)
-
   for x in names:
     cClear()
 
@@ -112,7 +110,74 @@ def lister(names):
 
     req()
 
-  time.sleep(20)
+  time.sleep(5)
+
+def unlist(names):
+  cClear()
+
+  if type(names) != list:
+    names = [names]
+
+  if len(names) == 1:
+    plr = ""
+  else:
+    plr = "s"
+
+  confirm = input(Fore.RED + "Are you sure you want to unlist " + str(len(names)) + " name" + plr + "? [y/n] " + Style.RESET_ALL)
+
+  if confirm.lower() != "y":
+    cClear()
+    print(Fore.RED + "Aborting!" + Style.RESET_ALL)
+    time.sleep(2)
+    menu()
+
+  headers = {"Accept": 'application/json', "Content-Type": 'application/json'}
+
+  for x in names:
+    cClear()
+
+    def req():
+
+      try:
+        r = requests.post(endpoint + "/api/v0/marketplace/" + x + "/cancel", headers=headers, cookies={"namebase-main": cookies}).json()
+      except:
+        print(Fore.RED + "An error occured... Trying again." + Style.RESET_ALL)
+        time.sleep(5)
+        req()
+
+      try:
+        if r['success']:
+          print(Fore.GREEN + "Unlisting for " + x + " was successful!" + Style.RESET_ALL)
+        else:
+          print(Fore.RED + "An unknown error occured... Trying again.\n" + r + Style.RESET_ALL)
+          time.sleep(5)
+          req()
+      except:
+        try:
+          if r['code'] == "REQUEST_UNAUTHENCIATED":
+            print(Fore.RED + "Could not authenticate! Make sure your cookie is correct." + Style.RESET_ALL)
+            time.sleep(5)
+            return
+          elif r['code'] == "REQUEST_NOT_DOMAIN_OWNER":
+            print(Fore.RED + "You do not own " + x + "!" + Style.RESET_ALL)
+            time.sleep(2)
+          else:
+            print(Fore.RED + "An unknown error occured... Trying again.\n" + r['code'] + Style.RESET_ALL)
+            time.sleep(5)
+            req()
+        except:
+          try:
+            print(Fore.RED + "An unknown error occured... Trying again.\n" + r + Style.RESET_ALL)
+            time.sleep(5)
+            req()
+          except:
+            print(Fore.RED + "An unknown error occured and could not be identified... Trying again." + Style.RESET_ALL)
+            time.sleep(5)
+            req()
+
+    req()
+
+  time.sleep(5)
 
 def menu():
   cClear()
@@ -120,6 +185,8 @@ def menu():
   options = [
   "List one name",
   "List multiple names",
+  "Unlist one name",
+  "Unlist multiple names",
   "Return to main menu"
   ]
 
@@ -168,12 +235,39 @@ def multiName():
 
   lister(names)
 
+def unSingleName():
+  cClear()
+  name = input(Fore.GREEN + "Enter a name to unlist: " + Style.RESET_ALL)
+
+  unlist(name)
+
+def unMultiName():
+  cClear()
+  file = input(Fore.GREEN + "Enter a file to import: " + Style.RESET_ALL)
+
+  names = []
+
+  try:
+    for x in open(file, "r"):
+      names.append(x.strip("\n/"))
+  except FileNotFoundError:
+    cClear()
+    print(Fore.RED + "File not found!" + Style.RESET_ALL)
+    time.sleep(2)
+    unMultiName()
+
+  unlist(names)
+
 def handler(choice):
   if choice == "1":
     singleName()
   elif choice == "2":
     multiName()
   elif choice == "3":
+    unSingleName()
+  elif choice == "4":
+    unMultiName()
+  elif choice == "5":
     return
   else:
     cClear()

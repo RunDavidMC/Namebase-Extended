@@ -44,7 +44,7 @@ def updater():
         desc = "None."
       else:
         desc = r['body']
-      print(Fore.GREEN + "An update is availible! Current version: " + version + ", updated version: " + r['tag_name'] + ".\nDescription: " + desc + "\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest.\n" + Style.RESET_ALL)
+      print(Fore.GREEN + "An update is availible! Current version: " + Fore.RED + version + Fore.GREEN + ", updated version: " + Fore.BLUE + r['tag_name'] + Fore.GREEN + ".\nDescription: " + Fore.MAGENTA + desc + Fore.GREEN + "\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest.\n" + Style.RESET_ALL)
       conf = input(Fore.GREEN + "Press enter to continue ")
   except:
     print(Fore.RED + "Update check failed!" + Style.RESET_ALL)
