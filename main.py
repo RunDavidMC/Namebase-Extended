@@ -1,7 +1,7 @@
 import os
 from colorama import init, Fore, Back, Style
 import time
-import csv
+import requests
 
 import login
 import bid
@@ -22,10 +22,29 @@ colors = [
   Fore.MAGENTA
   ]
 
+version = "v0.0.2a"
+
 pName = Fore.BLUE + "--- Namebase Extended ---" + Style.RESET_ALL
 
 def cClear():
   os.system('cls' if os.name == 'nt' else 'clear')
+
+def updater():
+  try:
+    r = requests.get("https://api.github.com/repos/rundavidmc/Namebase-Extended/releases/latest").json()
+  except:
+    print(Fore.RED + "Update check failed!" + Style.RESET_ALL)
+    time.sleep(2)
+    return
+  try:
+    if r['tag_name'].lower() != version.lower() and r['prerelease'] == False and r['draft'] == False:
+      print(Fore.GREEN + "An update is availible!\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest\n" + Style.RESET_ALL)
+      conf = input(Fore.GREEN + "Press enter to continue ")
+  except:
+    print(Fore.RED + "Update check failed!" + Style.RESET_ALL)
+    time.sleep(2)
+    return
+
 
 def menu():
   cClear()
