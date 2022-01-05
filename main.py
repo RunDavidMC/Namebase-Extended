@@ -22,7 +22,7 @@ colors = [
   Fore.MAGENTA
   ]
 
-version = "v0.0.1a"
+version = "v0.0.4a"
 
 pName = Fore.BLUE + "--- Namebase Extended ---" + Style.RESET_ALL
 
@@ -30,6 +30,8 @@ def cClear():
   os.system('cls' if os.name == 'nt' else 'clear')
 
 def updater():
+  cClear()
+
   try:
     r = requests.get("https://api.github.com/repos/rundavidmc/Namebase-Extended/releases/latest").json()
   except:
@@ -37,7 +39,7 @@ def updater():
     time.sleep(2)
     return
   try:
-    if r['tag_name'].lower() != version.lower() and r['prerelease'] == False and r['draft'] == False:
+    if r['tag_name'].lower() != version.lower() and str(r['prerelease']).lower() == "false" and str(r['draft']).lower() == "false":
       print(Fore.GREEN + "An update is availible!\nDownload it at " + Fore.CYAN + "https://github.com/RunDavidMC/Namebase-Extended/releases/latest\n" + Style.RESET_ALL)
       conf = input(Fore.GREEN + "Press enter to continue ")
   except:
@@ -99,7 +101,8 @@ def handler(choice):
   
   menu()
 
+updater()
+
 cookie = login.menu()
 
-updater()
 menu()
