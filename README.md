@@ -64,4 +64,4 @@ You can donate at `hs1qnk4w8wwun20ru93syg8aeuegek2avep9fjpdu3`. It is not requir
 
 # Modification
 
-As this program is licensed under GNUv3, all modifications to this program must be open sourced. 
+As this program is licensed under GNU GPLv3, all modifications to this program must be open sourced. 
