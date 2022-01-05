@@ -22,7 +22,7 @@ colors = [
   Fore.MAGENTA
   ]
 
-version = "v0.0.2a"
+version = "v0.0.1a"
 
 pName = Fore.BLUE + "--- Namebase Extended ---" + Style.RESET_ALL
 
@@ -101,4 +101,5 @@ def handler(choice):
 
 cookie = login.menu()
 
+updater()
 menu()
