@@ -112,10 +112,13 @@ def bidder(names):
             return
           elif r['code'] == "TOO_LATE_TO_BID":
             print(Fore.RED + "Auction for " + x + " is already over!" + Style.RESET_ALL)
-            time.sleep(2)
+            time.sleep(1)
           elif r['code'] == "REQUEST_RESERVED_DOMAIN":
             print(Fore.RED + "Domain " + x + " is reserved!" + Style.RESET_ALL)
-            time.sleep(2)
+            time.sleep(1)
+          elif r['code'] == "REQUEST_BID_IS_DOMINATED":
+            print(Fore.RED + "Domain " + x + " is dominated!" + Style.RESET_ALL)
+            time.sleep(1)
           else:
             print(Fore.RED + "An unknown error occured... Trying again.\n" + r['code'] + Style.RESET_ALL)
             time.sleep(5)
