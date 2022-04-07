@@ -107,12 +107,12 @@ def myDoms():
 
   doms = []
   offset = 0
-
+# Not listed
   if types == "o":
 
     while total > 0:
       total -= 100
-      r = requests.get(endpoint + "/api/user/domains/not-listed/" + str(offset) + "?sortKey=acquiredAt&sortDirection=desc&limit=100", cookies={"namebase-main": cookies}).json()
+      r = requests.get(endpoint + f"/api/user/domains/not-listed/{str(offset)}" + "?sortKey=acquiredAt&sortDirection=desc&limit=100", cookies={"namebase-main": cookies}).json()
       [doms.append(i) for i in r['domains']]
       offset += 100
     
@@ -125,20 +125,22 @@ def myDoms():
       for x in doms:
         print(x['name'])
         fileTemp.write(x['name'] + "\n")
-
+# Listed for sale
   if types == "s":
-    r = requests.get(endpoint + "/api/user/domains/listed/0", cookies={"namebase-main": cookies}).json()
-    [doms.append(i) for i in r['domains']]
-    
-    if mode == "a":
+    while len(r['domains']) > 0:
+      r = requests.get(endpoint + f"/api/user/domains/listed/{str(offset)}", cookies={"namebase-main": cookies}).json()
+      [doms.append(i) for i in r['domains']]
+      offset += 15
+    if mode == "a": # Advanced
       file = csv.writer(fileTemp, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
       file.writerow(["Name", "Price", "Renewal Block"])
       for x in doms:
         file.writerow([x['name'], float(x['amount']) / 1000000, x['renewalBlock']])
-    else:
+    else: # Simple
       for x in doms:
         print(x['name'])
         fileTemp.write(x['name'] + "\n")
+
 
   fileTemp.close()
   print(Fore.GREEN + "Successfully got names!" + Style.RESET_ALL)
