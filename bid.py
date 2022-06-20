@@ -106,6 +106,7 @@ def bidder(names):
           print(Fore.RED + "An unknown error occured... Trying again.\n" + r + Style.RESET_ALL)
           time.sleep(5)
           req()
+        time.sleep(delay)
       except:
         try:
           if r['code'] == "REQUEST_UNAUTHENCIATED":
