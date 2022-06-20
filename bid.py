@@ -67,7 +67,7 @@ def bidder(names):
     time.sleep(2)
     menu()
     
-   delay = float(input("How much delay do you want in between requests (in seconds)?"))
+  delay = float(input("How much delay do you want in between requests (in seconds)?"))
 
   if type(names) != list:
     names = [names]
