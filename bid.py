@@ -66,6 +66,8 @@ def bidder(names):
     print(Fore.RED + "Your lockup must be at least 0.4!" + Style.RESET_ALL)
     time.sleep(2)
     menu()
+    
+   delay = float(input("How much delay do you want in between requests (in seconds)?"))
 
   if type(names) != list:
     names = [names]
@@ -132,6 +134,8 @@ def bidder(names):
             print(Fore.RED + "An unknown error occured and could not be identified... Trying again." + Style.RESET_ALL)
             time.sleep(5)
             req()
+        
+        time.sleep(delay)
 
     req()
 
