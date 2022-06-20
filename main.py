@@ -22,7 +22,7 @@ colors = [
   Fore.MAGENTA
   ]
 
-version = "v0.1.1a"
+version = "v0.1.2a"
 
 pName = Fore.BLUE + "--- Namebase Extended ---" + Style.RESET_ALL
 
